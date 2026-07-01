@@ -4,111 +4,391 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy — Sermon Keeper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet" />
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #6B3FA0;
+      --purple-dark: #4A2870;
+      --purple-light: #EDE7F6;
+      --purple-mid: #9C6FD6;
+      --text: #1B1C1A;
+      --text-soft: #5A5B58;
+      --bg: #F5F3F0;
+      --white: #FFFFFF;
+      --shadow: 0 4px 24px rgba(107, 63, 160, 0.10);
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f8f7f4;
-      color: #1b1c1a;
-      line-height: 1.7;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
     }
-    header {
-      background: #5b3a8e;
-      color: #fff;
-      padding: 32px 24px 28px;
+
+    .hero {
+      background: linear-gradient(135deg, #4A2870 0%, #6B3FA0 50%, #9C6FD6 100%);
+      padding: 64px 24px 80px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    header h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.3px; }
-    header p  { font-size: 14px; opacity: 0.8; margin-top: 6px; }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 22px;
+      font-size: 34px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .hero h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(28px, 6vw, 40px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .hero .subtitle {
+      font-size: 16px;
+      color: rgba(255,255,255,0.75);
+      font-weight: 500;
+    }
+    .hero .badge {
+      display: inline-block;
+      margin-top: 20px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.9);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .wave {
+      display: block;
+      width: 100%;
+      margin-top: -2px;
+      line-height: 0;
+    }
+
     main {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 40px 24px 80px;
+      padding: 8px 20px 80px;
     }
-    h2 {
+
+    .summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 32px 0 40px;
+      justify-content: center;
+    }
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--white);
+      border: 1px solid #E5E2DD;
+      border-radius: 30px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-soft);
+      box-shadow: var(--shadow-sm);
+    }
+    .chip .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+      flex-shrink: 0;
+    }
+    .chip .dot.green  { background: #34C759; }
+    .chip .dot.orange { background: #FF9500; }
+
+    .section {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 28px 28px 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(107,63,160,0.07);
+      transition: box-shadow 0.2s;
+    }
+    .section:hover { box-shadow: var(--shadow); }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .section-icon {
+      width: 44px; height: 44px;
+      border-radius: 13px;
+      background: var(--purple-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .section-header h2 {
       font-size: 17px;
       font-weight: 700;
-      color: #5b3a8e;
-      margin: 32px 0 10px;
+      color: var(--text);
+      letter-spacing: -0.2px;
     }
-    p, li { font-size: 15px; color: #3a3b38; }
-    ul { padding-left: 20px; margin-top: 6px; }
-    li { margin-bottom: 4px; }
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 28px 24px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      margin-bottom: 4px;
+    .section-header .num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--purple-mid);
+      letter-spacing: 0.5px;
+      display: block;
+      text-transform: uppercase;
+      margin-bottom: 2px;
     }
-    .updated {
-      font-size: 13px;
-      color: #888;
-      margin-bottom: 24px;
+
+    p, li {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-soft);
     }
+    strong { color: var(--text); font-weight: 600; }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    ul li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    ul li::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--purple-mid);
+      margin-top: 9px;
+      flex-shrink: 0;
+    }
+
+    .perm-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .perm-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--purple-light);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    .perm-item .perm-icon { font-size: 20px; flex-shrink: 0; }
+    .perm-item .perm-title { font-size: 14px; font-weight: 700; color: var(--text); }
+    .perm-item .perm-desc  { font-size: 13px; color: var(--text-soft); margin-top: 2px; }
+
+    .contact-card {
+      background: linear-gradient(135deg, #4A2870, #7C4DB5);
+      border-radius: 20px;
+      padding: 32px 28px;
+      text-align: center;
+      margin-top: 32px;
+      box-shadow: 0 8px 32px rgba(107,63,160,0.25);
+    }
+    .contact-card .icon { font-size: 36px; margin-bottom: 12px; }
+    .contact-card h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .contact-card p  { font-size: 14px; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
+    .contact-card a {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .contact-card a:hover { background: rgba(255,255,255,0.25); }
+
     footer {
       text-align: center;
+      padding: 40px 20px;
       font-size: 13px;
-      color: #aaa;
-      padding: 24px;
+      color: #B0ADA8;
     }
-    a { color: #5b3a8e; }
+    footer a { color: var(--purple-mid); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .section { padding: 20px 18px; }
+      .hero { padding: 48px 20px 64px; }
+    }
   </style>
 </head>
 <body>
 
-<header>
+<div class="hero">
+  <div class="hero-icon">📖</div>
   <h1>Sermon Keeper</h1>
-  <p>Privacy Policy</p>
-</header>
+  <p class="subtitle">Privacy Policy</p>
+  <span class="badge">Last updated: July 1, 2026</span>
+</div>
+
+<svg class="wave" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <path d="M0 48H1440V0C1440 0 1080 48 720 48C360 48 0 0 0 0V48Z" fill="#F5F3F0"/>
+</svg>
 
 <main>
-  <div class="card">
-    <p class="updated">Last updated: July 1, 2026</p>
 
-    <p>Sermon Keeper ("the App") is a personal productivity app for managing and organizing sermons. Your privacy is important to us. This policy explains what data we collect and how we use it.</p>
+  <div class="summary">
+    <div class="chip"><span class="dot green"></span>No personal data collected</div>
+    <div class="chip"><span class="dot green"></span>All data stored on your device</div>
+    <div class="chip"><span class="dot"></span>No ads or tracking</div>
+    <div class="chip"><span class="dot orange"></span>Internet only for Bible &amp; EGW</div>
+  </div>
 
-    <h2>1. Data We Collect</h2>
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🗄️</div>
+      <div>
+        <span class="num">Section 01</span>
+        <h2>Data We Collect</h2>
+      </div>
+    </div>
     <p>Sermon Keeper stores all your data <strong>locally on your device only</strong>. We do not collect, transmit, or store any personal information on external servers. This includes:</p>
     <ul>
       <li>Sermon titles, content, and notes</li>
-      <li>Folders and tags</li>
-      <li>Delivery dates and locations</li>
+      <li>Folders, tags, and categories</li>
+      <li>Delivery dates, times, and locations</li>
       <li>App settings and preferences</li>
     </ul>
-
-    <h2>2. Internet Access</h2>
-    <p>The App may access the internet only for the following optional features:</p>
-    <ul>
-      <li><strong>E. G. White Writings</strong> — fetches content from the Ellen G. White Estate public API (egwwritings.org). No personal data is sent.</li>
-      <li><strong>Bible verses</strong> — may fetch from a public Bible API. No personal data is sent.</li>
-    </ul>
-
-    <h2>3. Third-Party Services</h2>
-    <p>We do not share your data with any third parties. The App does not use analytics, advertising SDKs, or tracking services.</p>
-
-    <h2>4. Permissions</h2>
-    <ul>
-      <li><strong>Microphone</strong> — used only for the optional voice dictation feature, when you explicitly activate it. Audio is processed on-device.</li>
-      <li><strong>Internet</strong> — used only for the optional EGW Writings and Bible verse features described above.</li>
-    </ul>
-
-    <h2>5. Data Security</h2>
-    <p>Since all data is stored locally on your device, security depends on your device's own protection (lock screen, encryption). We recommend keeping your device secured.</p>
-
-    <h2>6. Children's Privacy</h2>
-    <p>The App is not directed at children under 13. We do not knowingly collect data from children.</p>
-
-    <h2>7. Changes to This Policy</h2>
-    <p>We may update this policy from time to time. Any changes will be reflected on this page with an updated date.</p>
-
-    <h2>8. Contact</h2>
-    <p>If you have questions about this privacy policy, contact us at:<br>
-    <a href="mailto:bonev.apps.sup@gmail.com">bonev.apps.sup@gmail.com</a></p>
   </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🌐</div>
+      <div>
+        <span class="num">Section 02</span>
+        <h2>Internet Access</h2>
+      </div>
+    </div>
+    <p>The App accesses the internet <strong>only</strong> for the following optional features. No personal data is ever transmitted:</p>
+    <ul>
+      <li><strong>E. G. White Writings</strong> — fetches content from the Ellen G. White Estate public API (egwwritings.org).</li>
+      <li><strong>Bible verses</strong> — may fetch from a public Bible API to display scripture.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🔒</div>
+      <div>
+        <span class="num">Section 03</span>
+        <h2>Permissions</h2>
+      </div>
+    </div>
+    <div class="perm-list">
+      <div class="perm-item">
+        <span class="perm-icon">🎙️</span>
+        <div>
+          <div class="perm-title">Microphone</div>
+          <div class="perm-desc">Used only for the optional voice dictation feature, activated only when you tap the dictation button. Audio is processed entirely on-device.</div>
+        </div>
+      </div>
+      <div class="perm-item">
+        <span class="perm-icon">📡</span>
+        <div>
+          <div class="perm-title">Internet</div>
+          <div class="perm-desc">Used only for the optional EGW Writings and Bible verse features. No personal data leaves your device.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🤝</div>
+      <div>
+        <span class="num">Section 04</span>
+        <h2>Third-Party Services</h2>
+      </div>
+    </div>
+    <p>We do not share your data with any third parties. Sermon Keeper does not use analytics SDKs, advertising networks, or tracking services of any kind.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🛡️</div>
+      <div>
+        <span class="num">Section 05</span>
+        <h2>Data Security</h2>
+      </div>
+    </div>
+    <p>Since all data is stored locally on your device, its security depends on your device's own protections — lock screen, biometrics, and storage encryption. We recommend keeping your device secured with a strong PIN or biometric lock.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">👶</div>
+      <div>
+        <span class="num">Section 06</span>
+        <h2>Children's Privacy</h2>
+      </div>
+    </div>
+    <p>Sermon Keeper is not directed at children under 13. We do not knowingly collect data from children. If you believe a child has provided personal information, please contact us and we will address it promptly.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <div>
+        <span class="num">Section 07</span>
+        <h2>Changes to This Policy</h2>
+      </div>
+    </div>
+    <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated date at the top. We encourage you to review this page periodically.</p>
+  </div>
+
+  <div class="contact-card">
+    <div class="icon">✉️</div>
+    <h3>Questions or concerns?</h3>
+    <p>If you have any questions about this Privacy Policy, feel free to reach out to us directly.</p>
+    <a href="mailto:bonev.apps.sup@gmail.com">bonev.apps.sup@gmail.com</a>
+  </div>
+
 </main>
 
-<footer>© 2026 Bobo Apps · Sermon Keeper</footer>
+<footer>
+  <p>© 2026 <strong>Bobo Apps</strong> · Sermon Keeper</p>
+  <p style="margin-top:6px"><a href="mailto:bonev.apps.sup@gmail.com">Contact Support</a></p>
+</footer>
 
 </body>
 </html>
